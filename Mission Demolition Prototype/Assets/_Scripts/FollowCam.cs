@@ -22,11 +22,21 @@ public class FollowCam : MonoBehaviour {
 	
 	// Update is called once per frame
 	void FixedUpdate () {
+        Vector3 destination;
         // Если нет объекта слежки, возвращаем
-        if (poi == null) return;
-
-        // Извлекаем позицию точки интереса
-        Vector3 destination = poi.transform.position;
+        if (poi == null) {
+            destination = Vector3.zero;
+        } else {
+            // Позиция точки интереса
+            destination = poi.transform.position;
+            if (poi.tag == "Projectile") {
+                // Если тело покоится
+                if (poi.GetComponent<Rigidbody>().IsSleeping()) {
+                    poi = null;
+                    return;
+                }
+            }
+        }
         destination.x = Mathf.Max(minXY.x, destination.x);
         destination.y = Mathf.Max(minXY.y, destination.y);
         destination = Vector3.Lerp(transform.position, destination, easing);
