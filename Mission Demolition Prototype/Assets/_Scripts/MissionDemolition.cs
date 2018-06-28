@@ -4,9 +4,9 @@ using UnityEngine;
 using UnityEngine.UI;
 
 /*
- 
+    AIMS:
     -Сделать так, чтоб при смене вида со снаряда, его линия изменялась
-    -Сделать показ линий рогатки с помощью Line Renderer
+    !Сделать показ линий рогатки с помощью Line Renderer
     -Сделать так, чтобы ближайшие несколько выстрелов так же показывались линиями
     -Если сделано больше трёх выстрелов левел перезагружается
      
@@ -60,7 +60,7 @@ public class MissionDemolition : MonoBehaviour {
 
         // Возвращаем камеру
         SwitchView("Both");
-        ProjectileLine.S.Clear();
+        //ProjectileLine.S.Clear();
 
         // Возвращаем цель
         Goal.goalMet = false;
@@ -122,6 +122,7 @@ public class MissionDemolition : MonoBehaviour {
 
     static public void SwitchView(string eView) {
         S.showing = eView;
+        // Если до этого показывался снаряд, его линия размывается
         switch (S.showing) {
             case "Slingshot":
                 FollowCam.S.poi = null;
@@ -136,6 +137,18 @@ public class MissionDemolition : MonoBehaviour {
     }
 
     public static void ShotFired() {
+        //GameObject lineGO = new GameObject("Line");
+        //lineGO.transform.position = new Vector3(0, 0, 0);
+        //lineGO.AddComponent<ProjectileLine>();
+        //lineGO.GetComponent<ProjectileLine>().enabled = true;
+        //lineGO.AddComponent<LineRenderer>();
+        //lineGO.GetComponent<LineRenderer>().enabled = true;
+        //LineRenderer line = lineGO.GetComponent<LineRenderer>();
+        //line.material = new Material(Shader.Find("../_Materials/Mat_ProjectileLine"));
+        //line.startWidth = 0.5f;
+        //line.endWidth = 0f;
+        //line.positionCount = 0;
+
         S.shotsTaken++;
     }
 }

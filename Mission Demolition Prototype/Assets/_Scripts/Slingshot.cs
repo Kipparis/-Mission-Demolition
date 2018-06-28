@@ -67,6 +67,15 @@ public class Slingshot : MonoBehaviour {
         Vector3 projPos = launchPos + mouseDelta;
         projectile.transform.position = projPos;
 
+        // находим лайн рендерер и добавляем туда три точки
+        GameObject lineGO = GameObject.Find("SlingshotLine");
+        LineRenderer line = lineGO.GetComponent<LineRenderer>();
+        line.positionCount = 3;
+        line.SetPosition(0, new Vector3(-8.39f,-6.11f, 1.96f));
+        line.SetPosition(1, projectile.transform.position);
+        line.SetPosition(2, new Vector3(-9.68f, -6.11f, -1.99f));
+        line.enabled = true;
+
         if (Input.GetMouseButtonUp(0)) {
             // Если кнопку отпустили
             aimingMode = false;
@@ -75,6 +84,7 @@ public class Slingshot : MonoBehaviour {
             FollowCam.S.poi = projectile;
             projectile = null;
             MissionDemolition.ShotFired();
+            line.enabled = false;
         }
 	}
 }

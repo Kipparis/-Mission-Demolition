@@ -358,7 +358,7 @@ LineRenderer:
   m_ReflectionProbeUsage: 0
   m_RenderingLayerMask: 4294967295
   m_Materials:
-  - {fileID: 2100000, guid: 9554af7e1dd00414f85026f6c4629644, type: 2}
+  - {fileID: 2100000, guid: 175148ad91f3a2b4d97d3a649085e541, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -462,6 +462,8 @@ MonoBehaviour:
   minDist: 0.5
   ______________: 0
   line: {fileID: 0}
+  lines: []
+  lineCounter: 0
   points: []
 --- !u!1 &202887591
 GameObject:

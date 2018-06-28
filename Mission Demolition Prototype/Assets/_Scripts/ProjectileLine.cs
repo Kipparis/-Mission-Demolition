@@ -8,18 +8,36 @@ public class ProjectileLine : MonoBehaviour {
     public float minDist = 0.1f;
     public bool ______________;
 
+    public GameObject lineGO;
+    public LineRenderer lineRenderer;
+
     public LineRenderer line;
+    public LineRenderer[] lines;
+    public int lineCounter = 0;
     private GameObject _poi;
     public List<Vector3> points;
 
     void Awake() {
         S = this;
+        //// Создаём лайн рендерер
+        //lineGO = new GameObject("Line");
+        //lineGO.transform.position = new Vector3(0, 0, 0);
+        //// Извлекаем лайн рендерер
+        //lineRenderer = lineGO.GetComponent<LineRenderer>();
+        //// Добавляем материал
+        //lineRenderer.material = new Material(Shader.Find("_Materials/Mat_ProjectileLine"));
+        //// line
+
+        //// Добавляем компонент рендера
+        //lineGO.AddComponent<LineRenderer>();
         // Извлекаем лайн рендерер
         line = GetComponent<LineRenderer>();
         // Выключаем пока не нужен
         line.enabled = false;
         // Создаём список точек
         points = new List<Vector3>();
+        // Инициализируем массив
+        lines = new LineRenderer[3];
     }
 
     public GameObject poi {
@@ -28,9 +46,9 @@ public class ProjectileLine : MonoBehaviour {
             _poi = value;
             if(_poi != null) {
                 // Если приравнивается другая точка, всё обнуляется
-                line.enabled = false;
+                //line.enabled = false;
                 points = new List<Vector3>();
-                AddPoint();
+                //AddPoint();
             }
         }
     }
@@ -65,7 +83,6 @@ public class ProjectileLine : MonoBehaviour {
         } else {
             // Это не первая точка
             points.Add(pt);
-            //line.SetVertexCount(points.Count);
             line.positionCount = points.Count;
             line.SetPosition(points.Count - 1, lastPoint);
             line.enabled = true;
@@ -83,6 +100,7 @@ public class ProjectileLine : MonoBehaviour {
         }
     }
 
+    // Находим снаряд из камеры
     void FixedUpdate() {
         if (poi == null) {
             // Если нет пои, ищем такой
