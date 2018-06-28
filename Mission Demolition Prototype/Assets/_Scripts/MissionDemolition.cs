@@ -125,12 +125,15 @@ public class MissionDemolition : MonoBehaviour {
         // Если до этого показывался снаряд, его линия размывается
         switch (S.showing) {
             case "Slingshot":
+                ProjectileLine.S.poi = null;
                 FollowCam.S.poi = null;
                 break;
             case "Castle":
+                ProjectileLine.S.poi = null;
                 FollowCam.S.poi = S.castle;
                 break;
             case "Both":
+                ProjectileLine.S.poi = null;
                 FollowCam.S.poi = GameObject.Find("ViewBoth");
                 break;
         }
